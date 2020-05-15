@@ -73,14 +73,26 @@
            embedded_svc.settings.enabledFeatures = ['LiveAgent'];
            embedded_svc.settings.entryFeature = 'LiveAgent';
  
-           embedded_svc.init(
-               // params for your org
-           );
-       };
- 
-       if (!window.embedded_svc) {
-           var s = document.createElement('script');
-           s.setAttribute('src', 'https://<yourCoreURL>/embeddedservice/5.0/esw.min.js');
+		embedded_svc.init(
+			'https://hrblockenterprise--designlab.my.salesforce.com',
+			'https://designlab-hrblockenterprise.cs123.force.com/helpcenter',
+			gslbBaseURL,
+			'00D3I0000008mzC',
+			'chat_agents',
+			{
+				baseLiveAgentContentURL: 'https://c.la1-c1cs-ia4.salesforceliveagent.com/content',
+				deploymentId: '5723k000000bxPd',
+				buttonId: '5733k000000g9uS',
+				baseLiveAgentURL: 'https://d.la1-c1cs-ia4.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'chat_agents',
+				isOfflineSupportEnabled: false
+			}
+		);
+	};
+
+	if (!window.embedded_svc) {
+		var s = document.createElement('script');
+		s.setAttribute('src', 'https://hrblockenterprise--designlab.my.salesforce.com/embeddedservice/5.0/esw.min.js');
            s.onload = function () {
                initESW(null);
            };
