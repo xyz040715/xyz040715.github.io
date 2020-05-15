@@ -62,7 +62,6 @@ Fri May 15 04:41:50 EDT 2020
 	};
 
 	if (!window.embedded_svc) {
-		alert('normal');
 		var s = document.createElement('script');
 		s.setAttribute('src', 'https://hrblockenterprise--designlab.my.salesforce.com/embeddedservice/5.0/esw.min.js');
 		s.onload = function() {
@@ -70,8 +69,7 @@ Fri May 15 04:41:50 EDT 2020
 		};
 		document.body.appendChild(s);
 	} else {
-		alert('else');
-		initESW('https://hrblockenterprise--designlab.my.salesforce.com');
+		initESW('https://service.force.com');
 	}
 </script>
 </body></html>
