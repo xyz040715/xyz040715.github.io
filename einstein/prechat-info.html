@@ -17,34 +17,34 @@
 <script type='text/javascript'>
     var initESW = function(gslbBaseURL) {
     
-//--- read url
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const fName = urlParams.get('first_name');
-const lName = urlParams.get('last_name');
-const email = urlParams.get('email_address');
-const swPromoCode = urlParams.get('sw_promo_code');
-const swProductYr = urlParams.get('sw_product_yr');
-const svcTypeIndicator = urlParams.get('service_type_indicator');
-const blockID = urlParams.get('blockID');
-/*
-//-- define variable values
-const fName = 'Yunzhen';
-const lName = 'Hou';
-const email = 'Yunzhen.Hou@hrblock.com';
-const swPromoCode = 'sda101';
-const swProductYr = '2019';
-const svcTypeIndicator = 'OLA';
-const blockID='9999-1234';
-*/
-console.log(fName);    
-console.log(lName);    
-console.log(email);    
-console.log(swPromoCode);
-console.log(swProductYr);
-console.log(svcTypeIndicator);
-console.log(blockID);
-// --- read url end.
+		//--- read url
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const fName = urlParams.get('first_name');
+		const lName = urlParams.get('last_name');
+		const email = urlParams.get('email_address');
+		const swPromoCode = urlParams.get('sw_promo_code');
+		const swProductYr = urlParams.get('sw_product_yr');
+		const svcTypeIndicator = urlParams.get('service_type_indicator');
+		const blockID = urlParams.get('blockID');
+		/*
+		//-- define variable values
+		const fName = 'Yunzhen';
+		const lName = 'Hou';
+		const email = 'Yunzhen.Hou@hrblock.com';
+		const swPromoCode = 'sda101';
+		const swProductYr = '2019';
+		const svcTypeIndicator = 'OLA';
+		const blockID='9999-1234';
+		*/
+		console.log(fName);    
+		console.log(lName);    
+		console.log(email);    
+		console.log(swPromoCode);
+		console.log(swProductYr);
+		console.log(svcTypeIndicator);
+		console.log(blockID);
+		// --- read url end.
     
     
         embedded_svc.settings.displayHelpButton = false; //Or false
@@ -61,98 +61,98 @@ console.log(blockID);
             // Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
             // Returns a valid button ID.
         //};
-/*--------
-full_name (First Name + Last Name)
-email_address, 
-sw_promo_code, 
-sw_product_yr=2019 
-service_type_indicator
+		/*--------
+		full_name (First Name + Last Name)
+		email_address, 
+		sw_promo_code, 
+		sw_product_yr=2019 
+		service_type_indicator
 
-*/
-embedded_svc.settings.extraPrechatInfo = [{
-  "entityName": "Contact",
-  "entityFieldMaps": [{
-    "isExactMatch": true,
-    "fieldName": "FirstName",
-    "doCreate": true,
-    "doFind": true,
-    "label": "firstName"
-  }, {
-    "isExactMatch": true,
-    "fieldName": "LastName",
-    "doCreate": true,
-    "doFind": true,
-    "label": "LastName"
-  }, {
-    "isExactMatch": true,
-    "fieldName": "Email",
-    "doCreate": true,
-    "doFind": true,
-    "label": "Email"
-  }, {
-    "isExactMatch": true,
-    "fieldName": "BlockID",
-    "doCreate": true,
-    "doFind": true,
-    "label": "BlockID"
-  }]
-}, {
-  "entityName": "Case",
-  "entityFieldMaps": [{
-    "isExactMatch": false,
-    "fieldName": "Subject",
-    "doCreate": true,
-    "doFind": false,
-    "label": "issue"
-  }, {
-    "isExactMatch": false,
-    "fieldName": "Status",
-    "doCreate": true,
-    "doFind": false,
-    "label": "Status"
-  }, {
-    "isExactMatch": false,
-    "fieldName": "Origin",
-    "doCreate": true,
-    "doFind": false,
-    "label": "Origin"
-  }]
-}, {
-  "entityName": "Account",
-  "entityFieldMaps": [{
-    "isExactMatch": true,
-    "fieldName": "Name",
-    "doCreate": true,
-    "doFind": true,
-    "label": "LastName"
-  }]
-}];
-embedded_svc.settings.extraPrechatFormDetails = [{
-  "label": "swPromoCode",
-  "value": swPromoCode,
-  "displayToAgent": true
-  "transcriptFields": ["swPromoCode__c"]
-}, {
-  "label": "swProductYr",
-  "value": swProductYr,
-  "displayToAgent": true
-}, {
-  "label": "svcTypeIndicator",
-  "value": svcTypeIndicator,
-  "displayToAgent": true
-}, {
-  "label": "issue",
-  "value": "Do the work",
-  "displayToAgent": true
-}];        
+		*/
+		embedded_svc.settings.extraPrechatInfo = [{
+		  "entityName": "Contact",
+		  "entityFieldMaps": [{
+		    "isExactMatch": true,
+		    "fieldName": "FirstName",
+		    "doCreate": true,
+		    "doFind": true,
+		    "label": "firstName"
+		  }, {
+		    "isExactMatch": true,
+		    "fieldName": "LastName",
+		    "doCreate": true,
+		    "doFind": true,
+		    "label": "LastName"
+		  }, {
+		    "isExactMatch": true,
+		    "fieldName": "Email",
+		    "doCreate": true,
+		    "doFind": true,
+		    "label": "Email"
+		  }, {
+		    "isExactMatch": true,
+		    "fieldName": "BlockID",
+		    "doCreate": true,
+		    "doFind": true,
+		    "label": "BlockID"
+		  }]
+		}, {
+		  "entityName": "Case",
+		  "entityFieldMaps": [{
+		    "isExactMatch": false,
+		    "fieldName": "Subject",
+		    "doCreate": true,
+		    "doFind": false,
+		    "label": "issue"
+		  }, {
+		    "isExactMatch": false,
+		    "fieldName": "Status",
+		    "doCreate": true,
+		    "doFind": false,
+		    "label": "Status"
+		  }, {
+		    "isExactMatch": false,
+		    "fieldName": "Origin",
+		    "doCreate": true,
+		    "doFind": false,
+		    "label": "Origin"
+		  }]
+		}, {
+		  "entityName": "Account",
+		  "entityFieldMaps": [{
+		    "isExactMatch": true,
+		    "fieldName": "Name",
+		    "doCreate": true,
+		    "doFind": true,
+		    "label": "LastName"
+		  }]
+		}];
+		embedded_svc.settings.extraPrechatFormDetails = [{
+		  "label": "swPromoCode",
+		  "value": swPromoCode,
+		  "displayToAgent": true,
+		  "transcriptFields": ["swPromoCode__c"]
+		}, {
+		  "label": "swProductYr",
+		  "value": swProductYr,
+		  "displayToAgent": true
+		}, {
+		  "label": "svcTypeIndicator",
+		  "value": svcTypeIndicator,
+		  "displayToAgent": true
+		}, {
+		  "label": "issue",
+		  "value": "Do the work",
+		  "displayToAgent": true
+		}];        
 
 
-embedded_svc.settings.prepopulatedPrechatFields = {
-    FirstName: fName,
-    LastName: lName,
-    Email: email,
-    swPromoCode: swPromoCode
-};         //Sets the auto-population of pre-chat form fields
+		embedded_svc.settings.prepopulatedPrechatFields = {
+		    FirstName: fName,
+		    LastName: lName,
+		    Email: email,
+		    swPromoCode: swPromoCode
+		};         //Sets the auto-population of pre-chat form fields
         //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
         //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
 
