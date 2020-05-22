@@ -72,8 +72,12 @@
 					service_type_indicator
 			
 					*/
+					//SOQL		select name,id, createddate, swPromoCode__c, caseid, contactid from livechattranscript order by createddate desc limit 5
+					//
 					embedded_svc.settings.extraPrechatInfo = [{
 						"entityName": "custom_entity__c",
+						"linkToEntityName": "LiveChatTranscript",
+						"linkToEntityField": "Chat_Transcript2__c",
 						"showOnCreate": true,
 						"entityFieldMaps": [{
 							"isExactMatch": false,
