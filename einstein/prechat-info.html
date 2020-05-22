@@ -73,6 +73,17 @@
 			
 					*/
 					embedded_svc.settings.extraPrechatInfo = [{
+						"entityName": "custom_entity__c",
+						"showOnCreate": true,
+						"entityFieldMaps": [{
+							"isExactMatch": false,
+							"fieldName": "BlockID__c",
+							"doCreate": true,
+							"doFind": false,
+							"label": "BlockID"
+						}]
+					},
+					{
 						"entityName": "Contact",
 						"showOnCreate": true,
 						"linkToEntityName": "Case",
