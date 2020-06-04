@@ -1,4 +1,4 @@
-
+--//no case creation
 embedded_svc.settings.extraPrechatInfo = [
     {
         "entityFieldMaps": [
