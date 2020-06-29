@@ -4865,6 +4865,7 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 					const swPromoCode = urlParams.get('sw_promo_code');
 					const swProductYr = urlParams.get('sw_product_yr');
 					const svcTypeIndicator = urlParams.get('service_type_indicator');
+					const onlineProduct = urlParams.get('online_product');
 					const blockID = urlParams.get('blockID');
 					const buttonID = urlParams.get('buttonID');
 					/*
@@ -4883,6 +4884,7 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 					console.log(swPromoCode);
 					console.log(swProductYr);
 					console.log(svcTypeIndicator);
+					console.log(onlineProduct);
 					console.log(blockID);
 					console.log(buttonID);
 					// --- read url end.
@@ -4972,8 +4974,14 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 						"value": swProductYr,
 						"displayToAgent": true
 					}, {
+						"label": "onlineProduct",
+						"value": onlineProduct,
+						"transcriptFields": ["Online_Product__c"]
+						"displayToAgent": true
+					}, {
 						"label": "svcTypeIndicator",
 						"value": svcTypeIndicator,
+						"transcriptFields": ["Service_Type_Indicator__c"]
 						"displayToAgent": true
 					}, {
 						"label": "issue",
