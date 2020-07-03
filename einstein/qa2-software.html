@@ -20,14 +20,23 @@
         
         var initESW = function(gslbBaseURL) {
             <!-- read URL for prechat field values STARTS HERE -->
-            var fName = "{!$CurrentPage.parameters.first_name}";
-            var lName = "{!$CurrentPage.parameters.last_name}";
-            var email = "{!$CurrentPage.parameters.email_address}";
-            var swPromoCode = "{!$CurrentPage.parameters.sw_promo_code}";
-            var swProductYr = "{!$CurrentPage.parameters.sw_product_yr}";
-            var svcTypeIndicator = "{!$CurrentPage.parameters.service_type_indicator}";
+//            var fName = "{!$CurrentPage.parameters.first_name}";
+//            var lName = "{!$CurrentPage.parameters.last_name}";
+//            var email = "{!$CurrentPage.parameters.email_address}";
+//            var swPromoCode = "{!$CurrentPage.parameters.sw_promo_code}";
+//            var swProductYr = "{!$CurrentPage.parameters.sw_product_yr}";
+//            var svcTypeIndicator = "{!$CurrentPage.parameters.service_type_indicator}";
             <!-- read URL for prechat field values ENDS HERE -->
                 
+		const queryString = window.location.search;
+		const urlParams = new URLSearchParams(queryString);
+		const fName = urlParams.get('first_name');
+		const lName = urlParams.get('last_name');
+		const email = urlParams.get('email_address');
+		const swPromoCode = urlParams.get('sw_promo_code');
+		const swProductYr = urlParams.get('sw_product_yr');
+		const svcTypeIndicator = urlParams.get('service_type_indicator');
+
             embedded_svc.settings.displayHelpButton = true; //Or false
             embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
             
