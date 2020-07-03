@@ -4866,6 +4866,7 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 					const swProductYr = urlParams.get('sw_product_yr');
 					const svcTypeIndicator = urlParams.get('service_type_indicator');
 					const onlineProduct = urlParams.get('online_product');
+					const newClient = urlParams.get('new_client');
 					const blockID = urlParams.get('blockID');
 					const buttonID = urlParams.get('buttonID');
 					/*
@@ -4877,6 +4878,7 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 					const swProductYr = '2019';
 					const svcTypeIndicator = 'OLA';
 					const blockID='9999-1234';
+					const newClient='9999-1234';
 					*/
 					console.log(fName);
 					console.log(lName);
@@ -4885,6 +4887,7 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 					console.log(swProductYr);
 					console.log(svcTypeIndicator);
 					console.log(onlineProduct);
+					console.log(newClient);
 					console.log(blockID);
 					console.log(buttonID);
 					// --- read url end.
@@ -4972,6 +4975,11 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 					}, {
 						"label": "swProductYr",
 						"value": swProductYr,
+						"displayToAgent": true
+					}, {
+						"label": "New_Client",
+						"value": newClient,
+						"transcriptFields": ["New_Client__c"],
 						"displayToAgent": true
 					}, {
 						"label": "onlineProduct",
