@@ -5022,6 +5022,16 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 					embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 					embedded_svc.settings.entryFeature = 'LiveAgent';
 
+            <!-- Event Monitoring STARTS HERE --> 
+            embedded_svc.addEventHandler("afterInit", function(data) {
+                embedded_svc.onHelpButtonClick();
+            }); 
+    
+            $(document).on('DOMNodeInserted', ".prechatUI.embeddedServiceLiveAgentStatePrechatDefaultUI", function (e) {
+                if(fName && lName && email)
+                    $(".startButton.uiButton--default.uiButton.embeddedServiceSidebarButton").click();
+            }); 
+            <!--  Event Monitoring ENDS HERE --> 
 
 embedded_svc.init(
 			'https://hrblockenterprise--dev2.my.salesforce.com',
