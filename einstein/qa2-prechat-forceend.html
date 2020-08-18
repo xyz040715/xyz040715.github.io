@@ -4837,9 +4837,17 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 
 });</script><iframe src="./Tax Preparation Services Company _ H&amp;R Block®_files/pixel.html" style="display: none;"></iframe><script type="text/javascript" async="" src="./Tax Preparation Services Company _ H&amp;R Block®_files/generic1592923004492.js" charset="UTF-8"></script><span></span><img border="0" alt="" aria-hidden="true" src="./Tax Preparation Services Company _ H&amp;R Block®_files/saved_resource(7)" width="0" height="0" style="position: absolute; visibility: hidden; width: 0px; height: 0px; border: 0px;">
 
+
 <!--- START COPY -->
 <!--- START COPY -->
 <!--- START COPY -->
+<font color = red>
+<form>
+<input name=EndChatNow type=submit onClick="EndChatNow()"/>
+</form>
+<HR>
+</font>
+
 
 			<style type='text/css'>
 				.embeddedServiceHelpButton .helpButton .uiButton {
@@ -4853,6 +4861,13 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 			</style>
 
 			<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+			<script type='text/javascript'>
+var EndChatNow = function() {
+embedded_svc.liveAgentAPI.endChat();
+embedded_svc.liveAgentAPI.clearSession();
+}
+
+			</script>
 			<script type='text/javascript'>
 				var initESW = function (gslbBaseURL) {
 
@@ -4922,7 +4937,7 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 					embedded_svc.settings.extraPrechatInfo = [{
 						"entityName": "custom_entity__c",
 						"saveToTranscript": "custom_entity__c",
-						"showOnCreate": true,
+						"showOnCreate": false,
 						"entityFieldMaps": [{
 							"isExactMatch": false,
 							"fieldName": "BlockID__c",
@@ -4933,22 +4948,16 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 					},
 					{
 						"entityName": "Contact",
-						"showOnCreate": true,
+						"showOnCreate": false,
 						"linkToEntityName": "Case",
 						"linkToEntityField": "ContactId",
 						"saveToTranscript": "ContactId",
 						"entityFieldMaps": [{
 							"isExactMatch": true,
-							"fieldName": "FirstName",
+							"fieldName": "Name",
 							"doCreate": true,
 							"doFind": true,
 							"label": "firstName"
-						}, {
-							"isExactMatch": true,
-							"fieldName": "LastName",
-							"doCreate": true,
-							"doFind": true,
-							"label": "LastName"
 						}, {
 							"isExactMatch": true,
 							"fieldName": "Email",
@@ -4999,17 +5008,14 @@ ktag('setup', 'KT-N426A-3ED', '<USER_ID>');
 						"label": "FirstName",
 						"value": fName,
 						"displayToAgent": true
-,						"transcriptFields": ["first_name__c"]
 					}, {
 						"label": "LastName",
 						"value": lName,
 						"displayToAgent": true
-,						"transcriptFields": ["first_name__c"]
 					}, {
 						"label": "Email",
 						"value": email,
 						"displayToAgent": true
-,						"transcriptFields": ["first_name__c"]
 					}];
 
 

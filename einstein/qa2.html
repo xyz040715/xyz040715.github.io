@@ -5031,7 +5031,16 @@ embedded_svc.liveAgentAPI.clearSession();
 					embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 					embedded_svc.settings.entryFeature = 'LiveAgent';
 
+            <!-- Event Monitoring STARTS HERE -->
+            embedded_svc.addEventHandler("afterInit", function(data) {
+                embedded_svc.onHelpButtonClick();
+            });
 
+            $(document).on('DOMNodeInserted', ".prechatUI.embeddedServiceLiveAgentStatePrechatDefaultUI", function (e) {
+                if(fName && lName && email)
+                    $(".startButton.uiButton--default.uiButton.embeddedServiceSidebarButton").click();
+            });
+            <!--  Event Monitoring ENDS HERE -->
 
 embedded_svc.init(
 			'https://hrblockenterprise--qa2.my.salesforce.com',
