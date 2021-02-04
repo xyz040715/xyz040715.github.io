@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CHAT PAGE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <style type='text/css'>
+        .embeddedServiceHelpButton .helpButton .uiButton {
+            background-color: #005290;
+            font-family: "Arial", sans-serif;
+        }
+
+            .embeddedServiceHelpButton .helpButton .uiButton:focus {
+                outline: 1px solid #005290;
+            }
+
+        .embeddedServiceHelpButton .helpButton {
+            display: none;
+        }
+
+        @media screen and (max-device-width:481px) {
+            .embeddedServiceSidebar.sidebarMaximized {
+                background: none;
+            }
+
+            .embeddedServiceSidebar.layout-docked .dockableContainer {
+                max-width: unset;
+                height: 100%;
+                margin: 0;
+                border-radius: unset;
+            }
+
+            .embeddedServiceSidebarMinimizedDefaultUI.sidebarHeader {
+                bottom: 14px;
+            }
+        }
+
+        @media (min-device-width:768px) and (max-device-width:1205px) {
+            .embeddedServiceSidebar.sidebarMaximized {
+                background: none;
+            }
+
+            .embeddedServiceSidebar.layout-docked .dockableContainer {
+                right: 10px;
+                width: 320px;
+                max-height: 498px;
+                border-radius: 8px 8px 0 0;
+                position: fixed;
+                left: auto;
+                bottom: 0;
+                margin: 0;
+                height: 90%;
+            }
+        }
+    </style>
+
+    <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+    <script type='text/javascript'>
+
+        // On page load set the correct size of the iframe to account for either CWAE/Contact Us or Session Continuity.
+        function helpButtonLoaded() {
+            var helpButton = document.querySelector('.helpButton');
+
+
+            if (!helpButton) {
+                window.setTimeout(helpButtonLoaded, 500);
+                return;
+            }
+            var height = helpButton.clientHeight;
+            var width = helpButton.clientWidth;
+            window.parent.postMessage({
+                frameHeight: height,
+                frameWidth: width
+            }, '*'); // Used a * but for security reasons you can plug in the domain name.
+        }
+        window.onload = helpButtonLoaded();
+
+        function OpenChat() {
+            var helpButton = $('.helpButtonEnabled');
+            if (helpButton && helpButton.length > 0) {
+                helpButton.click();
+                window.localStorage.removeItem('OnlineAssistUpgradeAction');
+            }
+        }
+
+        var initESW = function (gslbBaseURL, sfconfig) {
+
+            embedded_svc.settings.displayHelpButton = true; // Or false
+            embedded_svc.settings.language = 'en-US'; // For example, enter 'en' or 'en-US'
+            embedded_svc.settings.devMode = true;
+            // Have set the widget height and width as a property on the object
+            embedded_svc.settings.widgetWidth = 320;
+            embedded_svc.settings.widgetHeight = 498;
+
+            embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+            embedded_svc.settings.entryFeature = 'LiveAgent';
+            embedded_svc.init(
+                sfconfig.SFServerURL,
+                sfconfig.SFVFServerURL,
+                gslbBaseURL,
+                sfconfig.SFInitCodeID,
+                'chat_agents',
+                {
+                    baseLiveAgentContentURL: sfconfig.SFBaseLiveAgentContentURL,
+                    deploymentId: sfconfig.SFDeploymentId,
+                    buttonId: sfconfig.SFButtonID,
+                    baseLiveAgentURL: sfconfig.SFBaseLiveAgentURL,
+                    eswLiveAgentDevName: 'chat_agents',
+                    isOfflineSupportEnabled: false
+                }
+            );
+
+            var oaEvent = window.localStorage.getItem('OnlineAssistUpgradeAction');
+            if (oaEvent && oaEvent === "Chat") {
+                $(document).on('DOMNodeInserted', ".embeddedServiceHelpButton .helpButtonEnabled", function (e) {
+
+                    oaEvent = window.localStorage.getItem('OnlineAssistUpgradeAction');
+                    if (oaEvent && oaEvent === "Chat") {
+                        if (window.parent.hrbo.isIE)
+                            setTimeout(OpenChat, 1200);
+                        else
+                            setTimeout(OpenChat, 100);
+                        
+                    }
+                });
+            }
+        };
+
+        embedded_svc.addEventHandler("afterMinimize", function () {
+            var sidebar = document.querySelector('.embeddedServiceSidebarMinimizedDefaultUI');
+            var height = sidebar.clientHeight;
+            var width = sidebar.clientWidth;
+            window.parent.postMessage({
+                frameHeight: height,
+                frameWidth: width
+            }, '*');
+            window.parent.MaximizeChatFrame(false);
+        });
+
+        embedded_svc.addEventHandler("afterMaximize", function () {
+            var container = document.querySelector('.dockableContainer');
+            var height = container.clientHeight;
+            var width = container.clientWidth;
+            window.parent.postMessage({
+                frameHeight: embedded_svc.settings.widgetHeight,
+                frameWidth: embedded_svc.settings.widgetWidth
+            }, '*');
+            window.parent.MaximizeChatFrame(true);
+        });
+
+        embedded_svc.addEventHandler("afterDestroy", function () {
+            var height = document.querySelector('.helpButton').clientHeight;
+            var width = document.querySelector('.helpButton').clientWidth;
+            window.parent.postMessage({
+                frameHeight: height,
+                frameWidth: width
+            }, '*');
+
+            window.parent.ToggleChatIcon(true);
+            window.parent.MaximizeChatFrame(false);
+        });
+
+        var observer = new MutationObserver(function (mutations) {
+            var mutationTargetElement = document.querySelector('button.startButton');
+            if (document.contains(mutationTargetElement)) {
+
+                console.log("Mutation observer click event fired for salesforce start chat button");
+
+                if (parent && parent.HRBData.Medallia_data.ClientData.FName !== null && parent.HRBData.Medallia_data.ClientData.LName !== null) {
+                    mutationTargetElement.click();
+                    observer.disconnect();
+                }
+
+            }
+        });
+
+		observer.observe(document, { attributes: false, childList: true, characterData: false, subtree: true });
+
+
+		var closeObserver = new MutationObserver(function () {
+			var mutationTargetElement = document.querySelector('div.modalContainer');
+
+			if (document.contains(mutationTargetElement)) {
+				console.log("Chat window is opened, mutation observer log. Showing cobrowse link");
+                
+				parent.ShowCobrowseLink();
+				
+			}
+			else {
+				console.log("Chat window is closed, mutation observer log. Hiding cobrowse link");
+                
+				parent.HideCoBrowseLink();
+
+			}
+		});
+
+        //Attaching mutation observer only in case when its on desktop or mobile responsive
+		if (parent.IsHybridAppUser() == false) {
+            closeObserver.observe(document, { attributes: false, childList: true, characterData: false, subtree: true });
+		}		
+        
+        embedded_svc.addEventHandler("onHelpButtonClick", function (data) {
+
+            console.log("onHelpButtonClick event was fired.");
+
+            //HRB custom implementation
+			fetchConfigurationParams();
+        });
+
+        embedded_svc.addEventHandler("onChatRequestSuccess", function (data) {
+
+            console.log("onChatRequestSuccess event was fired. liveAgentSessionKey was " +
+                data.liveAgentSessionKey);
+        });
+        embedded_svc.addEventHandler("onChatEstablished", function (data) {
+            console.log("onChatEstablished event was fired. liveAgentSessionKey was " +
+                data.liveAgentSessionKey);
+        });
+        embedded_svc.addEventHandler("onChasitorMessage", function (data) {
+            console.log("onChasitorMessage event was fired. liveAgentSessionKey was " +
+                data.liveAgentSessionKey);
+
+            //HRB custom implementation, extending TCX session time out as long as client is exchanging messages
+            parent.PageActions.ExtendTCXSession();
+
+        });
+        embedded_svc.addEventHandler("onAgentMessage", function (data) {
+            console.log("onAgentMessage event was fired. liveAgentSessionKey was " +
+                data.liveAgentSessionKey);
+        });
+        embedded_svc.addEventHandler("onChatConferenceInitiated", function (data) {
+            console.log("onChatConferenceInitiated event was fired. liveAgentSessionKey was " +
+                data.liveAgentSessionKey);
+        });
+        embedded_svc.addEventHandler("onAgentJoinedConference", function (data) {
+            console.log("onAgentJoinedConference event was fired. liveAgentSessionKey was " +
+                data.liveAgentSessionKey);
+        });
+        embedded_svc.addEventHandler("onAgentLeftConference", function (data) {
+            console.log("onAgentLeftConference event was fired. liveAgentSessionKey was " +
+                data.liveAgentSessionKey);
+        });
+        embedded_svc.addEventHandler("onChatConferenceEnded", function (data) {
+            console.log("onChatConferenceEnded event was fired. liveAgentSessionKey was " +
+                data.liveAgentSessionKey);
+        });
+        embedded_svc.addEventHandler("onChatTransferSuccessful", function (data) {
+            console.log("onChatTransferSuccessful event was fired. liveAgentSessionKey was " +
+                data.liveAgentSessionKey);
+        });
+        embedded_svc.addEventHandler("onChatEndedByChasitor", function (data) {
+            console.log("onChatEndedByChasitor event was fired. liveAgentSessionKey was " +
+                data.liveAgentSessionKey);
+
+            //HRB custom implementation
+			observer.observe(document, { attributes: false, childList: true, characterData: false, subtree: true });
+        });
+        embedded_svc.addEventHandler("onChatEndedByAgent", function (data) {
+            console.log("onChatEndedByAgent event was fired. liveAgentSessionKey was " +
+				data.liveAgentSessionKey);
+
+             //HRB custom implementation
+			observer.observe(document, { attributes: false, childList: true, characterData: false, subtree: true });
+            //Hide cobrowse button
+			parent.ToggleCoBrowse();
+        });
+
+
+        var SalesForceParamType = {
+            Contact: 0,
+            Transcript: 1,
+            Case: 2,
+            CaseTranscript: 3
+        };
+
+        var fetchConfigurationParams = function () {
+            $.getJSON('/hrblock/api/customer/help/configuration/vendor/salesforce/chatparams', function (config) {
+
+                if (config.first_name.Value !== null && config.last_name.Value !== null) {
+                    embedded_svc.settings.prepopulatedPrechatFields = {
+                        FirstName: config.first_name.Value,
+                        LastName: config.last_name.Value,
+                        Email: config.email_address.Value
+                    };
+                }
+
+                SetHRBCustomParameters(config);
+
+                for (var i = 0; i < sfHrbExtraPreChatFormArray.length; i++) {
+
+                    if (sfHrbExtraPreChatFormArray[i].transcriptFields) {
+                        sfHrbExtraPreChatFormArray[i].transcriptFields[0] = sfHrbExtraPreChatFormArray[i].transcriptFields[0] + "__c";
+                    }
+                }
+
+                embedded_svc.settings.extraPrechatFormDetails = sfHrbExtraPreChatFormArray;
+
+                embedded_svc.settings.extraPrechatInfo = [
+                    {
+                        "entityName": "Contact",
+                        "showOnCreate": true,
+                        //"linkToEntityName": "Case",
+                        "linkToEntityField": "ContactId",
+                        "saveToTranscript": "Contact",
+                        "entityFieldMaps": [{
+                            "isExactMatch": true,
+                            "fieldName": "FirstName",
+                            "doCreate": true,
+                            "doFind": true,
+                            "label": "first_name"
+                        },
+                        {
+                            "isExactMatch": true,
+                            "fieldName": "LastName",
+                            "doCreate": true,
+                            "doFind": true,
+                            "label": "last_name"
+                        },
+                        {
+                            "isExactMatch": true,
+                            "fieldName": "Email",
+                            "doCreate": true,
+                            "doFind": true,
+                            "label": "email_address"
+                        },
+                        {
+                            "isExactMatch": true,
+                            "fieldName": "Online_User_ID__c",
+                            "doCreate": true,
+                            "doFind": true,
+                            "label": "online_user_id"
+                        },
+                        {
+                            "isExactMatch": true,
+                            "fieldName": "User_GUID__c",
+                            "doCreate": true,
+                            "doFind": true,
+                            "label": "user_guid"
+                        }
+                        ]
+                    }
+                ];
+
+            
+
+                console.log("Salesforce ExtraPreChatFormDetails:");
+                console.log(sfHrbExtraPreChatFormArray);
+
+                
+
+                sfHrbExtraPreChatFormArray = [];
+
+                window.parent.ToggleChatIcon(false);
+                window.parent.MaximizeChatFrame(true);
+            });
+        };
+
+        var sfHrbExtraPreChatFormArray = [];
+
+        var SetHRBCustomParameters = function (obj) {
+
+            var props = Object.getOwnPropertyNames(obj);
+            props.forEach(function (p) {
+
+                if (p == 'first_name' || p == 'last_name' || p == 'full_name' || p == 'email_address' || p == 'user_guid' || p == 'hrblock_atp' || p == 'online_user_id' || p == 'subject') {
+                    sfHrbExtraPreChatFormArray.push({
+                        label: p, value: obj[p].Value, displayToAgent: true
+                    });
+                }
+                else {
+                    sfHrbExtraPreChatFormArray.push({
+                        label: p, value: obj[p].Value, displayToAgent: true, transcriptFields: [p]
+                    });
+                }
+            });
+            return;
+        };
+
+
+        $.getJSON('/hrblock/api/customer/help/configuration/vendor/salesforce/meta', function (result) {
+
+            if (result) {
+
+                console.log("SF Config Values", result);
+
+                if (!window.embedded_svc) {
+                    var s = document.createElement('script');
+                    s.setAttribute('src', result.SFServerURL + '/embeddedservice/5.0/esw.min.js');
+                    s.onload = function () {
+                        initESW(null);
+                    };
+                    document.body.appendChild(s);
+                } else {
+                    initESW('https://service.force.com', result);
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
