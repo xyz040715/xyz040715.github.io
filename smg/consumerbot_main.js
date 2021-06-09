@@ -57,7 +57,7 @@ let setColorTheme = function() {
     return result
   })();
 
-  alert(mockDomain);
+
   var colorBrandSecondary = '#444';
   var fontFamily = "'Open Sans', Verdana, Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif";
   if (mockDomain == 'scotts' || domain == 'scotts.com') {
@@ -110,11 +110,11 @@ let setColorTheme = function() {
     document.documentElement.style.setProperty('--sfdc-theme-color-text-dark',    '#5100fd');
     document.documentElement.style.setProperty('--sfdc-button-border-radius',     '22px');
   } else {
-    colorBrandSecondary = '#8800fd';
+    colorBrandSecondary = '#c1cd23';
     document.documentElement.style.setProperty('--lwc-fontFamily',                '-apple-system, BlinkMacSystemFont, ' + fontFamily);
-    document.documentElement.style.setProperty('--lwc-colorTextDefault',          '#8800fd');
-    document.documentElement.style.setProperty('--lwc-colorTextInverse',          'aliceblue');
-    document.documentElement.style.setProperty('--sfdc-theme-color-text-dark',    '#8800fd');
+    document.documentElement.style.setProperty('--lwc-colorTextDefault',          '#00355e');
+    document.documentElement.style.setProperty('--lwc-colorTextInverse',          '#00355e');
+    document.documentElement.style.setProperty('--sfdc-theme-color-text-dark',    '#00355e');
     document.documentElement.style.setProperty('--sfdc-button-border-radius',     '22px');
   }
   
