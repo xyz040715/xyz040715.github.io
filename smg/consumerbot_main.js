@@ -110,11 +110,11 @@ let setColorTheme = function() {
     document.documentElement.style.setProperty('--sfdc-theme-color-text-dark',    '#5100fd');
     document.documentElement.style.setProperty('--sfdc-button-border-radius',     '22px');
   } else {
-    colorBrandSecondary = '#c1cd23';
+    colorBrandSecondary = '#FF0000';
     document.documentElement.style.setProperty('--lwc-fontFamily',                '-apple-system, BlinkMacSystemFont, ' + fontFamily);
-    document.documentElement.style.setProperty('--lwc-colorTextDefault',          '#00355e');
-    document.documentElement.style.setProperty('--lwc-colorTextInverse',          '#00355e');
-    document.documentElement.style.setProperty('--sfdc-theme-color-text-dark',    '#00355e');
+    document.documentElement.style.setProperty('--lwc-colorTextDefault',          '#0000FF');
+    document.documentElement.style.setProperty('--lwc-colorTextInverse',          '#0000FF');
+    document.documentElement.style.setProperty('--sfdc-theme-color-text-dark',    '#0000FF');
     document.documentElement.style.setProperty('--sfdc-button-border-radius',     '22px');
   }
   
