@@ -58,9 +58,8 @@ let setColorTheme = function() {
     return result
   })();
 
-
   var urlParams = new URLSearchParams(window.location.search);
-  var domain2=urlParams.get('domain');
+  var domain2 = urlParams.get('domain');
   if (domain2 != '') domain=domain2;
   
   var colorBrandSecondary = '#444';
