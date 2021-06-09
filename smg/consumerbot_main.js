@@ -57,6 +57,7 @@ let setColorTheme = function() {
     return result
   })();
 
+  alert(mockDomain);
   var colorBrandSecondary = '#444';
   var fontFamily = "'Open Sans', Verdana, Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif";
   if (mockDomain == 'scotts' || domain == 'scotts.com') {
