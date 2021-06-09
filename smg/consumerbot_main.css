@@ -1,0 +1,332 @@
+:root {
+    --lwc-fontFamily: 'Open Sans', Verdana, Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+    --lwc-colorBrandSecondary: #444;
+    --lwc-colorBorderBrandSecondary: #444;
+    --lwc-colorTextDefault: #444;
+    --lwc-colorTextInverse: rgba(255,255,255,.9);
+    --lwc-esColorBackgroundAlt2: #4d4d4d;
+    --sfdc-theme-color-text-dark: rgba(0,0,0,.9);
+    --sfdc-chat-button-height: 40px;
+    --sfdc-chat-button-border-radius: calc(var(--sfdc-chat-button-height) / 2) 0 0 calc(var(--sfdc-chat-button-height) / 2);
+    --sfdc-chat-button-padding: 20px 2px 16px 0;
+    --sfdc-button-border-radius: 4px;
+}
+
+@media (min-width: 960px) {
+    :root {
+        --sfdc-chat-button-height: 48px;
+        --sfdc-chat-button-padding: 24px 2px 20px 0;
+    }
+}
+
+/* ---- Styles for PoC page ---- */
+.einstein-poc-body-styling {
+    font-family: var(--lwc-fontFamily, 'Open Sans', sans-serif);
+    color: rgba(0,0,0,.9);
+    margin: 16px 8px 32px;
+}
+
+.einstein-poc-body-styling .container {
+    max-width: 50rem;
+    margin: 0 auto;
+}
+
+.einstein-poc-body-styling h1,
+.einstein-poc-body-styling h2 {
+    color: var(--lwc-colorTextDefault);
+}
+
+.einstein-poc-body-styling .epoc-hide {
+    display: none;
+}
+
+
+/* ---- Start live chat button & minimized chat button ---- */
+.embeddedServiceHelpButton>div.helpButton,
+button.embeddedServiceSidebarMinimizedDefaultUI,
+button.embeddedServiceSidebarMinimizedDefaultUI.sidebarHeader,
+button.embeddedServiceSidebarMinimizedDefaultUI.helpButton {
+    width: var(--sfdc-chat-button-height, 40px) !important;
+    bottom: 50%;
+    transform: translateY(50%);
+    height: unset;
+    right: 0;
+}
+
+.embeddedServiceHelpButton>div.helpButton .uiButton,
+button.embeddedServiceSidebarMinimizedDefaultUI,
+button.embeddedServiceSidebarMinimizedDefaultUI.sidebarHeader,
+button.embeddedServiceSidebarMinimizedDefaultUI.helpButton {
+    font-family: var(--lwc-fontFamily, 'Open Sans', sans-serif);
+    font-size: 16px;
+    font-weight: 500;
+    background-color: var(--lwc-colorBrandSecondary, #444);
+    color: var(--lwc-colorTextInverse, rgba(255,255,255,.9));
+    border-radius: var(--sfdc-chat-button-border-radius, 20px 0 0 20px);
+    box-shadow: 0 0 8px 0 rgba(0,0,0,.16);
+    flex-direction: column-reverse;
+    height: unset;
+    min-height: 8rem;
+    width: var(--sfdc-chat-button-height, 40px);
+    min-width: unset;
+    padding: var(--sfdc-chat-button-padding, 20px 2px 16px 0);
+    margin-left: 2px;
+    transition: margin-left .15s cubic-bezier(0.645, 0.045, 0.355, 1);
+    border: none;
+}
+
+button.embeddedServiceSidebarMinimizedDefaultUI,
+button.embeddedServiceSidebarMinimizedDefaultUI.sidebarHeader,
+button.embeddedServiceSidebarMinimizedDefaultUI.helpButton {
+    right: -2px;
+    transition: right .15s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.embeddedServiceHelpButton>div.helpButton .uiButton.helpButtonDisabled {
+    background-color: #888;
+    color: rgba(255,255,255,.9);
+    cursor: not-allowed;
+}
+
+.embeddedServiceHelpButton>div.helpButton .uiButton:focus,
+button.embeddedServiceSidebarMinimizedDefaultUI:focus {
+    outline: 1px solid var(--lwc-colorBrandSecondary, #444);
+}
+
+.embeddedServiceHelpButton>div.helpButton .helpButtonEnabled:hover {
+    margin-left: 0px;
+}
+
+button.embeddedServiceSidebarMinimizedDefaultUI:hover {
+    right: 0px;
+}
+
+button.embeddedServiceSidebarMinimizedDefaultUI:focus,
+button.embeddedServiceSidebarMinimizedDefaultUI:hover,
+button.embeddedServiceSidebarMinimizedDefaultUI.minimizedContainer:focus,
+button.embeddedServiceSidebarMinimizedDefaultUI.minimizedContainer:hover {
+    background: var(--lwc-colorBrandSecondary, #444);
+}
+
+.embeddedServiceHelpButton>div.helpButton .helpButtonEnabled::before,
+.embeddedServiceHelpButton>div.helpButton .helpButtonEnabled::before,
+button.embeddedServiceSidebarMinimizedDefaultUI::before,
+button.embeddedServiceSidebarMinimizedDefaultUI::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    pointer-events: none;
+    border-radius: var(--sfdc-chat-button-border-radius, 20px 0 0 20px);
+    opacity: 0;
+    transition: opacity .05s ease-in-out;
+}
+
+.embeddedServiceHelpButton>div.helpButton .helpButtonEnabled:focus::before,
+.embeddedServiceHelpButton>div.helpButton .helpButtonEnabled:hover::before,
+button.embeddedServiceSidebarMinimizedDefaultUI:focus::before,
+button.embeddedServiceSidebarMinimizedDefaultUI:hover::before {
+    border-radius: var(--sfdc-chat-button-border-radius, 20px 0 0 20px);
+    opacity: .2;
+}
+
+.embeddedServiceHelpButton>div.helpButton .helpButtonLabel,
+button.embeddedServiceSidebarMinimizedDefaultUI .minimizedText {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 16px;
+}
+
+.embeddedServiceHelpButton>div.helpButton .helpButtonEnabled:focus .helpButtonLabel {
+    text-decoration: none;
+}
+
+.embeddedServiceHelpButton>div.helpButton .embeddedServiceIcon,
+button.embeddedServiceSidebarMinimizedDefaultUI .embeddedServiceIcon {
+    margin: 8px 0 0;
+    transform: rotate(-90deg);
+}
+
+button.embeddedServiceSidebarMinimizedDefaultUI .embeddedServiceIcon svg {
+    fill: var(--lwc-colorTextInverse, rgba(255,255,255,.9));
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarMinimizedDefaultUI .content {
+    width: 100%;
+    padding: 0;
+    color: var(--lwc-colorTextInverse, rgba(255,255,255,.9));
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarMinimizedDefaultUI .messageContent {
+    flex-direction: column-reverse;
+    justify-content: center;
+}
+
+/* ---- Chat window ---- */
+/* Chat window container */
+div.embeddedServiceSidebar.modalContainer,
+.embeddedServiceSidebar .embeddedServiceSidebarButton {
+    font-family: var(--lwc-fontFamily, 'Open Sans', sans-serif);
+}
+
+div.embeddedServiceSidebar.layout-docked .dockableContainer,
+div.embeddedServiceSidebar.layout-float .dockableContainer {
+    box-shadow: 0px 2px 16px rgba(0,0,0,.2);
+}
+
+/* Chat window header */
+.embeddedServiceSidebar [embeddedservice-chatheader_chatheader-host] {
+    background: var(--lwc-esColorBackgroundAlt2);
+}
+
+.embeddedServiceSidebar .sidebarHeader h2 {
+    font-family: var(--lwc-fontFamily, 'Open Sans', sans-serif);
+    color: rgb(255,255,255);
+}
+
+/* Chat window form */
+.embeddedServiceSidebar .embeddedServiceSidebarForm .fieldList {
+    padding: 0;
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarForm .embeddedServiceSidebarFormField:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarFormField .uiInput .uiLabel-left {
+    color: var(--sfdc-theme-color-text-dark, rgba(0,0,0,.9));
+    margin-left: 0;
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarFormField .uiInput .required {
+    color: #c62828;
+    position: relative;
+    left: 2px;
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarFormField .uiInput--input {
+    margin-bottom: 0;
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarFormField .slds-style-inputtext,
+.embeddedServiceSidebar .embeddedServiceSidebarFormField .slds-style-select {
+    font-family: var(--lwc-fontFamily, 'Open Sans', sans-serif);
+    color: rgba(0,0,0,.9);
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarFormField .uiInputDefaultError .form-element__help {
+    color: #c62828;
+    margin-top: 1px;
+}
+
+/* Chat window form submit button */
+.embeddedServiceSidebarForm.buttonWrapper {
+    padding: 16px 24px;
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarButton {
+    border-radius: var(--sfdc-button-border-radius, 4px);
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarButton,
+.embeddedServiceSidebar .embeddedServiceSidebarButton:not(:disabled):focus,
+.embeddedServiceSidebar .embeddedServiceSidebarButton:not(:disabled):hover {
+    background: var(--lwc-colorBrandSecondary, #444);
+    color: var(--lwc-colorTextInverse, rgba(255,255,255,.9));
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarButton:not(:disabled)::before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: var(--sfdc-button-border-radius, 4px);
+    background: var(--lwc-colorTextInverse, rgba(255,255,255,.9));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .05s ease-in-out;
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarButton:not(:disabled):focus::before,
+.embeddedServiceSidebar .embeddedServiceSidebarButton:not(:disabled):hover::before {
+    opacity: .2;
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarButton .label,
+.embeddedServiceSidebar .embeddedServiceSidebarButton:disabled .label {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.embeddedServiceSidebar .embeddedServiceSidebarButton .label,
+.embeddedServiceSidebar .embeddedServiceSidebarButton:disabled .label,
+.embeddedServiceSidebar .uiButton--default .label,
+.embeddedServiceSidebar .uiButton--default:hover .label,
+.embeddedServiceSidebar .uiButton--default:focus .label {
+    color: var(--lwc-colorTextInverse, rgba(255,255,255,.9));
+}
+
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatItem.chatMessage button,
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatItem.chatMessage button span {
+    color: var(--lwc-colorTextDefault, #444);
+}
+
+/* Chat window chatting */
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChat .messageArea {
+    border: solid 1px transparent;
+}
+
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChat .chatSessionStartTime {
+    color: rgba(0,0,0,.6);
+}
+
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatPlaintextMessageDefaultUI.agent.plaintextContent {
+    color: rgba(0,0,0,.9);
+}
+
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatMenuMessage .rich-menu {
+    margin-right: 2px;
+}
+
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatMenuMessage .rich-menu-item {
+    color: var(--sfdc-theme-color-text-dark, rgba(0,0,0,.9));
+}
+
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatItem .isLightningOutContext .avatar.iconAvatar,
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatPlaintextMessageDefaultUI.chasitor.plaintextContent {
+    color: var(--lwc-colorTextInverse, rgba(255,255,255,.9));
+}
+
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatAvatar.isLightningOutContext .agentIconColor0 {
+    background: var(--lwc-colorBrandSecondary, #444);
+    line-height: 1.3;
+    font-weight: bold;
+}
+
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatMenuMessage .chatContent .rich-menu-item:hover,
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatMenuMessage .chatContent .rich-menu-item:active,
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatMenuMessage .chatContent .rich-menu-item:hover:active,
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatMenuMessage .chatContent .rich-menu-item:focus,
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatMenuMessage .chatContent .rich-menu-item:focus:hover {
+    background-color: #f5f7f8;
+    color: var(--sfdc-theme-color-text-dark, rgba(0,0,0,.9));
+    opacity: .75;
+}
+
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatInputFooter .unseenMessageNotificationWrapper .unseenMessageBubble {
+    background-color: #f5f7f8;
+}
+
+.embeddedServiceSidebar .unseenMessageNotification[embeddedService-chatUnseenMessageNotification_chatUnseenMessageNotification] .unseenMessageBubble[embeddedService-chatUnseenMessageNotification_chatUnseenMessageNotification] .messageCount[embeddedService-chatUnseenMessageNotification_chatUnseenMessageNotification] {
+    color: var(--sfdc-theme-color-text-dark, rgba(0,0,0,.9));
+}
+
+.embeddedServiceSidebar .embeddedServiceLiveAgentStateChatInputFooter .chasitorText {
+    color: rgba(0,0,0,.9);
+    font-weight: normal;
+}
