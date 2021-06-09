@@ -108,7 +108,15 @@ let setColorTheme = function() {
     document.documentElement.style.setProperty('--lwc-colorTextInverse',          'aliceblue');
     document.documentElement.style.setProperty('--sfdc-theme-color-text-dark',    '#5100fd');
     document.documentElement.style.setProperty('--sfdc-button-border-radius',     '22px');
+  } else {
+    colorBrandSecondary = '#8800fd';
+    document.documentElement.style.setProperty('--lwc-fontFamily',                '-apple-system, BlinkMacSystemFont, ' + fontFamily);
+    document.documentElement.style.setProperty('--lwc-colorTextDefault',          '#8800fd');
+    document.documentElement.style.setProperty('--lwc-colorTextInverse',          'aliceblue');
+    document.documentElement.style.setProperty('--sfdc-theme-color-text-dark',    '#8800fd');
+    document.documentElement.style.setProperty('--sfdc-button-border-radius',     '22px');
   }
+  
   document.documentElement.style.setProperty('--lwc-colorBrandSecondary',           colorBrandSecondary);
   document.documentElement.style.setProperty('--lwc-colorBorderBrandSecondary',     colorBrandSecondary);
   document.documentElement.style.setProperty('--lwc-colorBackgroundContrastPrimary',colorBrandSecondary);
