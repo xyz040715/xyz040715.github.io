@@ -39,6 +39,7 @@ String.prototype.lighten = function(lightness){
  */
 let setColorTheme = function() {
 
+  
   // Set mock domain from radio button
   var radioGroup = document.getElementsByName('mockDomain');
   mockDomain = '';
@@ -58,6 +59,10 @@ let setColorTheme = function() {
   })();
 
 
+  var urlParams = new URLSearchParams(window.location.search);
+  var domain2=urlParams.get('domain');
+  if (domain2 != '') domain=domain2;
+  
   var colorBrandSecondary = '#444';
   var fontFamily = "'Open Sans', Verdana, Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif";
   if (mockDomain == 'scotts' || domain == 'scotts.com') {
