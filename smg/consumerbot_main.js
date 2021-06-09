@@ -182,7 +182,7 @@ if (!window.embedded_svc) {
 let l = document.createElement('link');
 l.setAttribute('rel', 'stylesheet')
 l.setAttribute('type', 'text/css')
-l.setAttribute('href', 'https://scotts-einstein-chatbot-poc.uc.r.appspot.com/styles/styles.css')
+l.setAttribute('href', 'https://xyz040715.github.io/smg/consumerbot_main.css')
 document.head.appendChild(l);
 
 // Set color theme
